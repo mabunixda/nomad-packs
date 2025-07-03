@@ -2,9 +2,9 @@
 # Copyright (c) HashiCorp, Inc.
 # SPDX-License-Identifier: MPL-2.0
 
-
 set -u
 set -exo pipefail
+
 if [ $# -lt 1 ]; then
     cat <<EOF
 Validate pack(s) with:
@@ -56,7 +56,11 @@ case "$pack" in
     'zigbee2mqtt')
         export NOMAD_PACK_VAR_data_mount='/tmp/zigbee2mqtt'
 	;;
-
+    'evcc')
+        export NOMAD_PACK_VAR_data_mount="/tmp/evcc"
+        export NOMAD_PACK_VAR_vault_policy="evcc"
+        export NOMAD_PACK_VAR_network_mode=""
+    ;;
 esac
 
 # `nomad-pack render` catches pack templating errors
