@@ -6,10 +6,10 @@ job [[ template "job_name" . ]] {
   
   [[ if var "constraints" . ]][[ range $idx, $constraint := var "constraints" . ]]
   constraint {
-    attribute = [[ $constraint.attribute | quote ]]
-    value     = [[ $constraint.value | quote ]]
+    attribute = "${[[ $constraint.attribute ]]}"
+    value     = "[[ $constraint.value ]]"
     [[- if ne $constraint.operator "" ]]
-    operator  = [[ $constraint.operator | quote ]]
+    operator  = "[[ $constraint.operator ]]"
     [[- end ]]
   }
   [[- end ]][[- end ]]

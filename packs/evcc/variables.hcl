@@ -47,7 +47,7 @@ variable "image" {
 variable "version_tag" {
   description = "The docker image version. For options, see https://hub.docker.com/_/caddy"
   type        = string
-  default     = "0.204.5"
+  default     = "0.205.0"
 }
 
 variable "frontend_service_tags" { 
@@ -99,3 +99,12 @@ interval: 30s
 EOF
 }
 
+
+variable "left_delimiter" { 
+  type = string
+  default = "{{" 
+}
+variable "right_delimiter" { 
+  type = string 
+  default = "}}"
+}

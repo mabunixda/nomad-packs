@@ -57,8 +57,6 @@ job [[ template "job_name" . ]] {
       port = "ocpp"
     }
 
-    task "evcc" {
-      driver = "docker"
 
       [[ if var "vault_policy" . ]]
       vault {
@@ -67,6 +65,9 @@ job [[ template "job_name" . ]] {
         change_signal = "SIGINT"
       }
       [[- end ]]
+    task "evcc" {
+      driver = "docker"
+
 
       config {
         image = "[[ var "image" . ]]:[[ var "version_tag" . ]]"
@@ -95,6 +96,8 @@ job [[ template "job_name" . ]] {
       template {
         destination = "configs/configuration.yaml"
         change_mode = "restart"
+        left_delimiter = [[ var "left_delimiter" . | quote ]]
+        right_delimiter = [[ var "right_delimiter" . | quote ]]
         data        = <<EOH
 [[ var "configfile" . ]]
 EOH
